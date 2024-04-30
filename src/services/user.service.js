@@ -33,6 +33,20 @@ const userService = {
                 })
             }
         })
+    },
+
+    getById: (userId, callback) => {
+        logger.info(`getById: ${userId}`)
+        database.getById(userId, (err, data) => {
+            if (err) {
+                callback(err, null)
+            } else {
+                callback(null, {
+                    message: `User found with id ${userId}.`,
+                    data: data
+                })
+            }
+        })
     }
 }
 
