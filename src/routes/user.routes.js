@@ -4,7 +4,7 @@ const chai = require('chai')
 chai.should()
 const router = express.Router()
 const userController = require('../controllers/user.controller.js')
-const userService = require('src/services/user.service')
+const userService = require('../services/user.service')
 const logger = require('../util/logger')
 
 // Tijdelijke functie om niet bestaande routes op te vangen
@@ -20,14 +20,14 @@ const validateUserCreateChaiShould = (req, res, next) => {
     try {
         req.body.firstName.should.not.be.empty.and.a('string')
         req.body.lastName.should.not.be.empty.and.a('string')
-        req.body.emailAdress.should.not.be.empty.and.a('string').and.match(/@/)
+        req.body.emailAddress.should.not.be.empty.and.a('string').and.match(/@/)
 
         // Check if the email address is unique
-        database.emailExists(req.body.emailAdress, (err, emailExists) => {
-            if (err) {
-                throw new Error(err.message)
+        userService.getByEmail(req.body.emailAddress, (error, user) => {
+            if (error) {
+                throw new Error(error.message)
             }
-            if (emailExists) {
+            if (user) {
                 throw new Error('Email address already exists')
             }
             next()
