@@ -97,5 +97,15 @@ const database = {
     }
 }
 
+// Function to check if an email address exists in the database
+emailExists(email, callback) {
+    // Simulate asynchronous operation
+    setTimeout(() => {
+        const user = this._data.find((user) => user.emailAdress === email)
+        callback(null, !!user) // Return true if the user exists, false otherwise
+    }, this._delayTime)
+}
+
+
 module.exports = database
 // module.exports = database.index;

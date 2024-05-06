@@ -15,8 +15,6 @@ const notFound = (req, res, next) => {
     })
 }
 
-const database = require('srcdaoinmem-db.js')
-
 const validateUserCreateChaiShould = (req, res, next) => {
     try {
         req.body.firstName.should.not.be.empty.and.a('string')
@@ -36,7 +34,7 @@ const validateUserCreateChaiShould = (req, res, next) => {
     } catch (ex) {
         next({
             status: 400,
-            message: 'One or more fields are invalid: ${ex.message}',
+            message: ex.message,
             data: {}
         })
     }
