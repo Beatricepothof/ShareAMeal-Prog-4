@@ -20,7 +20,7 @@ it('TC-201-1 Verplicht veld ontbreekt', (done) => {
         .post(endpointToTest)
         .send({
             firstName: 'Voornaam',
-            lastName: 'Achternaam',
+            lastName: '',
             emailAdress: 'v.a@server.nl'
         })
         .end((err, res) => {
