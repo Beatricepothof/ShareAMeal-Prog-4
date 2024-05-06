@@ -83,8 +83,8 @@ const validateUserCreateChaiExpect = (req, res, next) => {
 // Userroutes
 router.post('/api/user', validateUserCreateChaiExpect, userController.create)
 router.get('/api/user', userController.getAll)
-router.get('/api/user/:userId', userController.getById)
-router.put('/api/user/:userId', userController.update)
-router.delete('/api/user/:userId', userController.delete)
+router.get('/api/user/1', userController.getById)
+router.put('/api/user/1', userController.update)
+router.delete('/api/user/1', userController.delete)
 
 module.exports = router
