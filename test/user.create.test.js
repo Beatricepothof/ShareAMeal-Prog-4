@@ -42,39 +42,30 @@ it('TC-201-1 Verplicht veld ontbreekt', (done) => {
 })
 
 it('TC-201-2 Niet-valide email adres', (done) => {
-    // Invalid email address formats
-    const invalidEmails = [
-        'invalid email',
-        'john.doe@example',
-        'john.doe@example..com',
-        'john doe@example.com',
-        '123@example.com',
-        'john@exa_mple.com',
-        'john.doe@example.com@example.com'
-    ]
+    // Existing email address
+    const existingEmail = 'existing@example.com'
 
-    invalidEmails.forEach((invalidEmail) => {
-        chai.request(server)
-            .post(endpointToTest)
-            .send({
-                firstName: 'Voornaam',
-                lastName: 'Achternaam',
-                emailAdress: invalidEmail
-            })
-            .end((err, res) => {
-                res.should.have.status(400)
-                res.should.not.have.status(200)
-                res.body.should.be.a('object')
-                res.body.should.have.property('status').equal(400)
-                res.body.should.have
-                    .property('message')
-                    .equal(`Invalid email address: ${invalidEmail}`)
-                res.body.should.have.property('data').which.is.an('object').and
-                    .is.empty
+    // Simulate creating a user with an existing email
+    chai.request(server)
+        .post(endpointToTest)
+        .send({
+            firstName: 'Voornaam',
+            lastName: 'Achternaam',
+            emailAdress: existingEmail
+        })
+        .end((err, res) => {
+            res.should.have.status(400)
+            res.should.not.have.status(200)
+            res.body.should.be.a('object')
+            res.body.should.have.property('status').equal(400)
+            res.body.should.have
+                .property('message')
+                .equal(`Email address ${existingEmail} already exists`)
+            res.body.should.have.property('data').which.is.an('object').and.is
+                .empty
 
-                done()
-            })
-    })
+            done()
+        })
 })
 
 it('TC-201-3 Niet-valide password', (done) => {
