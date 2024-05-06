@@ -60,9 +60,41 @@ const database = {
             // met het toegevoegde item als argument, of null als er een fout is opgetreden
             callback(null, item)
         }, this._delayTime)
-    }
+    },
 
-    // Voeg zelf de overige database functionaliteit toe
+    update(id, updatedUserData, callback) {
+        // Simulate asynchronous operation
+        setTimeout(() => {
+            const index = this._data.findIndex((item) => item.id === id)
+            if (index === -1) {
+                callback(
+                    { message: `Error: User with id ${id} does not exist!` },
+                    null
+                )
+            } else {
+                // Update the user data
+                this._data[index] = { ...this._data[index], ...updatedUserData }
+                callback(null, this._data[index])
+            }
+        }, this._delayTime)
+    },
+
+    delete(id, callback) {
+        // Simulate asynchronous operation
+        setTimeout(() => {
+            const index = this._data.findIndex((item) => item.id === id)
+            if (index === -1) {
+                callback(
+                    { message: `Error: User with id ${id} does not exist!` },
+                    null
+                )
+            } else {
+                // Remove the user from database
+                const deletedUser = this._data.splice(index, 1)[0]
+                callback(null, deletedUser)
+            }
+        }, this._delayTime)
+    }
 }
 
 module.exports = database

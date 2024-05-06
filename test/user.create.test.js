@@ -19,9 +19,7 @@ it('TC-201-1 Verplicht veld ontbreekt', (done) => {
     chai.request(server)
         .post(endpointToTest)
         .send({
-            firstName: 'Voornaam',
-            lastName: '',
-            emailAdress: 'v.a@server.nl'
+            // Leave all required fields empty
         })
         .end((err, res) => {
             /**
@@ -33,7 +31,9 @@ it('TC-201-1 Verplicht veld ontbreekt', (done) => {
             chai.expect(res.body).to.have.property('status').equals(400)
             chai.expect(res.body)
                 .to.have.property('message')
-                .equals('Missing or incorrect firstName field')
+                .equals(
+                    'Missing or incorrect fields: firstName, lastName, emailAddress'
+                )
             chai.expect(res.body).to.have.property('data').that.is.a('object')
                 .that.is.empty
 
