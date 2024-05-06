@@ -19,7 +19,7 @@ it('TC-201-1 Verplicht veld ontbreekt', (done) => {
     chai.request(server)
         .post(endpointToTest)
         .send({
-            // Leave all required fields empty
+            // Leaving required fields empty
         })
         .end((err, res) => {
             /**
@@ -78,7 +78,7 @@ it('TC-201-2 Niet-valide email adres', (done) => {
 })
 
 it('TC-201-3 Niet-valide password', (done) => {
-    // Send request with empty password field, password must be filled in
+    // Send request with empty password field
     chai.request(server)
         .post(endpointToTest)
         .send({

@@ -16,7 +16,6 @@ describe('UC206 Verwijderen van user', () => {
             .end((err, res) => {
                 res.should.have.status(200)
                 res.body.should.be.an('object')
-                // Add more assertions to validate the response
                 done()
             })
     })
@@ -26,10 +25,7 @@ describe('UC206 Verwijderen van user', () => {
             .delete(endpointToTest)
             .end((err, res) => {
                 res.should.have.status(403)
-                // Add more assertions to validate the error response
                 done()
             })
     })
-
-    // Add more test cases to cover alternative paths (B, C)
 })
