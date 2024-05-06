@@ -1,5 +1,5 @@
-const userService = require('../services/user.service')
-const logger = require('../util/logger')
+const userService = require('src/services/user.service')
+const logger = require('src/util/logger.js')
 
 let userController = {
     // Register a new user
@@ -48,7 +48,7 @@ let userController = {
     // Getting all user information by user id
     getById: (req, res, next) => {
         const userId = req.params.userId
-        logger.trace('userController: getById', userId)
+        logger.trace('getById', userId)
         userService.getById(userId, (error, success) => {
             if (error) {
                 return next({
