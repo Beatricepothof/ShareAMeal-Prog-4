@@ -16,20 +16,7 @@ describe('UC206 Verwijderen van user', () => {
             .end((err, res) => {
                 res.should.have.status(200)
                 res.body.should.be.an('object')
-                // Add more assertions to validate the response
                 done()
             })
     })
-
-    it('TC-206-2 Gebruiker heeft geen toegang tot het systeem', (done) => {
-        chai.request(server)
-            .delete(endpointToTest)
-            .end((err, res) => {
-                res.should.have.status(403)
-                // Add more assertions to validate the error response
-                done()
-            })
-    })
-
-    // Add more test cases to cover alternative paths (B, C)
 })

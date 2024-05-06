@@ -3,7 +3,8 @@ const assert = require('assert')
 const chai = require('chai')
 chai.should()
 const router = express.Router()
-const userController = require('../controllers/user.controller')
+const userController = require('../controllers/user.controller.js')
+const userService = require('src/services/user.service')
 const logger = require('../util/logger')
 
 // Tijdelijke functie om niet bestaande routes op te vangen
@@ -43,8 +44,8 @@ const validateUserCreateChaiShould = (req, res, next) => {
 // Userroutes
 router.post('/api/user', validateUserCreateChaiShould, userController.create)
 router.get('/api/user', userController.getAll)
-router.get('/api/user/1', userController.getById)
-router.put('/api/user/1', userController.update)
-router.delete('/api/user/1', userController.delete)
+router.get('/api/user/:userId', userController.getById)
+router.put('/api/user/:userId', userController.update)
+router.delete('/api/user/:userId', userController.delete)
 
 module.exports = router

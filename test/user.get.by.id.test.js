@@ -7,12 +7,11 @@ chai.should()
 chai.use(chaiHttp)
 tracer.setLevel('warn')
 
-const endpointToTest = '/api/user/:userId'
+const endpointToTest = '/api/user/1'
 
 describe('UC204 Opvragen van usergegevens bij ID', () => {
     it('TC-204-1 Opvragen van gebruikersgegevens bij geldig ID', (done) => {
-        // Assuming you have the userId of the user you want to retrieve
-        const userId = 'user123'
+        const userId = '1'
 
         chai.request(server)
             .get(`${endpointToTest}/${userId}`)
@@ -25,14 +24,12 @@ describe('UC204 Opvragen van usergegevens bij ID', () => {
     })
 
     it('TC-204-2 Opvragen van gebruikersgegevens bij ongeldig ID', (done) => {
-        // Assuming you have an invalid userId for testing
-        const invalidUserId = 'invalidUserId'
+        const invalidUserId = '4'
 
         chai.request(server)
             .get(`${endpointToTest}/${invalidUserId}`)
             .end((err, res) => {
                 res.should.have.status(404)
-                // Add more assertions to validate the error response
                 done()
             })
     })
