@@ -2,6 +2,7 @@ const userService = require('../services/user.service')
 const logger = require('../util/logger')
 
 let userController = {
+    // Register a new user
     create: (req, res, next) => {
         const user = req.body
         logger.info('create user', user.firstName, user.lastName)
@@ -23,6 +24,7 @@ let userController = {
         })
     },
 
+    // Get all users information
     getAll: (req, res, next) => {
         logger.trace('getAll')
         userService.getAll((error, success) => {
@@ -43,6 +45,7 @@ let userController = {
         })
     },
 
+    // Getting all user information by user id
     getById: (req, res, next) => {
         const userId = req.params.userId
         logger.trace('userController: getById', userId)
@@ -62,9 +65,52 @@ let userController = {
                 })
             }
         })
-    }
+    },
 
-    // Todo: Implement the update and delete methods
+    // Update existing user information
+    update: (req, res, next) => {
+        const userId = req.params.userId
+        const updatedUserData = req.body
+        //TODO: Add logger
+        userService.update(userId, updatedUserData, (error, success) => {
+            if (error) {
+                return next({
+                    status: error.status,
+                    message: error.message,
+                    data: {}
+                })
+            }
+            if (success) {
+                res.status(200).json({
+                    status: success.status,
+                    message: success.message,
+                    data: success.data
+                })
+            }
+        })
+    },
+
+    // Delete users by user id, including all user information
+    delete: (req, res, next) => {
+        const userId = req.params.userId
+
+        userService.delete(userId, (error, success) => {
+            if (error) {
+                return next({
+                    status: error.status,
+                    message: error.message,
+                    data: {}
+                })
+            }
+            if (success) {
+                res.status(200).json({
+                    status: success.status,
+                    message: success.message,
+                    data: success.data
+                })
+            }
+        })
+    }
 }
 
 module.exports = userController

@@ -1,0 +1,39 @@
+const chai = require('chai')
+const chaiHttp = require('chai-http')
+const server = require('../index')
+const tracer = require('tracer')
+
+chai.should()
+chai.use(chaiHttp)
+tracer.setLevel('warn')
+
+const endpointToTest = '/api/user/:userId'
+
+describe('UC204 Opvragen van usergegevens bij ID', () => {
+    it('TC-204-1 Opvragen van gebruikersgegevens bij geldig ID', (done) => {
+        // Assuming you have the userId of the user you want to retrieve
+        const userId = 'user123'
+
+        chai.request(server)
+            .get(`${endpointToTest}/${userId}`)
+            .end((err, res) => {
+                res.should.have.status(200)
+                res.body.should.be.an('object')
+                // Add more assertions to validate the user details and meals offered
+                done()
+            })
+    })
+
+    it('TC-204-2 Opvragen van gebruikersgegevens bij ongeldig ID', (done) => {
+        // Assuming you have an invalid userId for testing
+        const invalidUserId = 'invalidUserId'
+
+        chai.request(server)
+            .get(`${endpointToTest}/${invalidUserId}`)
+            .end((err, res) => {
+                res.should.have.status(404)
+                // Add more assertions to validate the error response
+                done()
+            })
+    })
+})

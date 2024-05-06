@@ -1,5 +1,5 @@
 {
-    "name": "nodejs-programmeren4-2324 ",
+    "name": "nodejs-programmeren4-2324",
     "version": "0.0.1",
     "description": "Mijn eerste Express server",
     "main": "index.js",
@@ -15,7 +15,7 @@
         "avans",
         "programmeren-4"
     ],
-    "author": "Robin",
+    "author": "Beatrice Pothof",
     "license": "ISC",
     "prettier": {
         "singleQuote": true,
@@ -32,5 +32,9 @@
         "chai-http": "^4.4.0",
         "mocha": "^10.4.0",
         "nodemon": "^3.1.0"
+    },
+    "directories": {
+        "example": "examples",
+        "test": "test"
     }
 }
